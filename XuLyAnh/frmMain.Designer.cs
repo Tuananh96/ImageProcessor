@@ -33,13 +33,13 @@
             this.buttonToGray = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +62,7 @@
             this.buttonLuuAnh.TabIndex = 3;
             this.buttonLuuAnh.Text = "Lưu ảnh";
             this.buttonLuuAnh.UseVisualStyleBackColor = true;
+            this.buttonLuuAnh.Click += new System.EventHandler(this.buttonLuuAnh_Click);
             // 
             // buttonToGray
             // 
@@ -89,15 +90,6 @@
             this.panel1.Size = new System.Drawing.Size(268, 237);
             this.panel1.TabIndex = 6;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(286, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(268, 237);
-            this.panel2.TabIndex = 7;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(24, 33);
@@ -106,6 +98,15 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Location = new System.Drawing.Point(286, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(268, 237);
+            this.panel2.TabIndex = 7;
             // 
             // pictureBox2
             // 
@@ -141,8 +142,8 @@
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

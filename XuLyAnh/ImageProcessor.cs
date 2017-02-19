@@ -50,25 +50,30 @@ namespace XuLyAnh
             return newImg;
         }
 
-        public static Bitmap TichChap(Bitmap img, int m, int n)
+        public static Bitmap TichChap(Bitmap img, int [,] boLoc, int m, int n)
         {
             Bitmap newImg = new Bitmap(img);
-            //int x, y;
             Color color;
-            Byte value;
+            Byte value=0;
             for (int x = 0; x < newImg.Width; x++)
             {
                 for (int y = 0; y < newImg.Height; y++)
                 {
-                    color = newImg.GetPixel(x, y);
-
                     for (int i = 0; i < n; i++)
                     {
                         for (int j = 0; j < m; j++)
                         {
-
+                            int pix1 = x - i;
+                            int pix2 = y - j;
+                            if (pix1 < 0) pix1 = 0;
+                            if (pix2 < 0) pix2 = 0;
+                            if (pix1 > newImg.Width) pix1 = newImg.Width;
+                            if (pix2 > newImg.Height) pix2 = newImg.Height;
+                            color = newImg.GetPixel(pix1, pix2);
+                            value = Convert.ToByte(boLoc[i, j] * (color.R + color.G + color.B)/3);
                         }
                     }
+                    newImg.SetPixel(x, y, Color.FromArgb(value, value, value));
                 }
             }
 
