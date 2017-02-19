@@ -47,7 +47,7 @@ namespace XuLyAnh
                     for (int j = 0; j < anh.Height; j++)
                     {
                         int t = (p[0] + p[1] + p[2]) / 3;
-                        //BGR p0,p1,p2;
+                       
                         p[0] = (byte)t;
                         p[1] = (byte)t;
                         p[2] = (byte)t;
@@ -58,7 +58,7 @@ namespace XuLyAnh
                 }
 
                 anh.UnlockBits(anh_Data);
-                picAnh.Image = anh;
+                picAnh2.Image = anh;
             }
             else MessageBox.Show("Chưa chọn ảnh.");
         }
