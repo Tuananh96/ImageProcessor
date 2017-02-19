@@ -61,11 +61,14 @@ namespace XuLyAnh
                 for (int y = 0; y < newImg.Height; y++)
                 {
                     color = newImg.GetPixel(x, y);
-                    for (int i = 0; i < m; i++)
-                    {
 
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 0; j < m; j++)
+                        {
+
+                        }
                     }
-                    //value = Convert.ToByte();
                 }
             }
 
