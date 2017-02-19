@@ -36,17 +36,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChonAnh
             // 
-            this.buttonChonAnh.Location = new System.Drawing.Point(579, 12);
+            this.buttonChonAnh.Location = new System.Drawing.Point(560, 12);
             this.buttonChonAnh.Name = "buttonChonAnh";
-            this.buttonChonAnh.Size = new System.Drawing.Size(75, 23);
+            this.buttonChonAnh.Size = new System.Drawing.Size(94, 23);
             this.buttonChonAnh.TabIndex = 2;
             this.buttonChonAnh.Text = "Chọn ảnh";
             this.buttonChonAnh.UseVisualStyleBackColor = true;
@@ -63,7 +65,7 @@
             // 
             // buttonToGray
             // 
-            this.buttonToGray.Location = new System.Drawing.Point(602, 59);
+            this.buttonToGray.Location = new System.Drawing.Point(22, 33);
             this.buttonToGray.Name = "buttonToGray";
             this.buttonToGray.Size = new System.Drawing.Size(133, 23);
             this.buttonToGray.TabIndex = 4;
@@ -73,9 +75,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(579, 237);
+            this.progressBar1.Location = new System.Drawing.Point(560, 237);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(156, 12);
+            this.progressBar1.Size = new System.Drawing.Size(175, 12);
             this.progressBar1.TabIndex = 5;
             // 
             // panel1
@@ -114,15 +116,25 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonToGray);
+            this.groupBox1.Location = new System.Drawing.Point(560, 41);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(175, 190);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Công cụ";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 261);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.buttonToGray);
             this.Controls.Add(this.buttonLuuAnh);
             this.Controls.Add(this.buttonChonAnh);
             this.Name = "frmMain";
@@ -132,6 +144,7 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -145,5 +158,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
