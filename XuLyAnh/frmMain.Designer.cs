@@ -37,6 +37,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonDenTrang = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -98,6 +99,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel2
             // 
@@ -119,6 +121,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonDenTrang);
             this.groupBox1.Controls.Add(this.buttonToGray);
             this.groupBox1.Location = new System.Drawing.Point(560, 41);
             this.groupBox1.Name = "groupBox1";
@@ -127,16 +130,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Công cụ";
             // 
+            // buttonDenTrang
+            // 
+            this.buttonDenTrang.Location = new System.Drawing.Point(22, 62);
+            this.buttonDenTrang.Name = "buttonDenTrang";
+            this.buttonDenTrang.Size = new System.Drawing.Size(133, 23);
+            this.buttonDenTrang.TabIndex = 5;
+            this.buttonDenTrang.Text = "Làm mờ ảnh (ảnh xám)";
+            this.buttonDenTrang.UseVisualStyleBackColor = true;
+            this.buttonDenTrang.Click += new System.EventHandler(this.buttonDenTrang_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 261);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.buttonLuuAnh);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.buttonLuuAnh);
             this.Controls.Add(this.buttonChonAnh);
             this.Name = "frmMain";
             this.Text = "frmMain";
@@ -160,5 +173,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonDenTrang;
     }
 }

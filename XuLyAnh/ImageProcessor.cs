@@ -21,7 +21,7 @@ namespace XuLyAnh
                 for (j = 0; j < newImg.Height; j++)
                 {
                     color = newImg.GetPixel(i, j);
-                    gray = Convert.ToByte(color.R * 0.287 + color.G * 0.599 + color.B * 0.114);
+                    gray = Convert.ToByte(color.R * 0.333 + color.G * 0.333 + color.B * 0.333);
                     newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
             }
@@ -36,48 +36,90 @@ namespace XuLyAnh
             Byte gray;
             progressBar.Maximum = img.Width;
 
-            for (int i = 0; i < newImg.Width; i++)
+            for (int i = 0; i < newImg.Width; i+=1)
             {
-                for (int j = 0; j < newImg.Height; j++)
+                for (int j = 0; j < newImg.Height; j+=1)
                 {
                     color = newImg.GetPixel(i, j);
-                    gray = Convert.ToByte(color.R * 0.287 + color.G * 0.599 + color.B * 0.114);
+                    gray = Convert.ToByte(color.R * 0.333 + color.G * 0.333 + color.B * 0.333);
                     newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
                 progressBar.Increment(1);
             }
-
+            
             return newImg;
         }
 
-        public static Bitmap TichChap(Bitmap img, int [,] boLoc, int m, int n)
+        public static Bitmap TichChap(Bitmap img)
         {
-            Bitmap newImg = new Bitmap(img);
-            Color color;
-            Byte value=0;
-            for (int x = 0; x < newImg.Width; x++)
+            Bitmap GrayIMG = ToGray(img);
+            float[,] boloc = BoLoc3x3();
+            //float thisDoXam;
+
+            for (int x = 2; x < GrayIMG.Width; x++)
             {
-                for (int y = 0; y < newImg.Height; y++)
+                for (int y = 2; y < GrayIMG.Height; y++)
                 {
-                    for (int i = 0; i < n; i++)
+                    float gray = 0;
+                    for (int k = 0; k < 3; k++)
                     {
-                        for (int j = 0; j < m; j++)
+                        for (int l = 0; l < 3; l++)
                         {
-                            int pix1 = x - i;
-                            int pix2 = y - j;
-                            if (pix1 < 0) pix1 = 0;
-                            if (pix2 < 0) pix2 = 0;
-                            if (pix1 > newImg.Width) pix1 = newImg.Width;
-                            if (pix2 > newImg.Height) pix2 = newImg.Height;
-                            color = newImg.GetPixel(pix1, pix2);
-                            value = Convert.ToByte(boLoc[i, j] * (color.R + color.G + color.B)/3);
+                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
                         }
                     }
-                    newImg.SetPixel(x, y, Color.FromArgb(value, value, value));
+
+                    Byte newG = Convert.ToByte(gray/9);
+                    Color newC = Color.FromArgb(newG,newG,newG);
+                    GrayIMG.SetPixel(x, y, newC);
                 }
             }
 
-            return newImg;
+            return GrayIMG;
+        }
+
+        public static Bitmap TichChap(Bitmap img, System.Windows.Forms.ProgressBar progressBar)
+        {
+            Bitmap GrayIMG = img;
+            float[,] boloc = BoLoc3x3();
+            progressBar.Maximum = GrayIMG.Width;
+
+            for (int x = 2; x < GrayIMG.Width; x++)
+            {
+                for (int y = 2; y < GrayIMG.Height; y++)
+                {
+                    float gray = 0;
+
+                    for (int k = 0; k < 3; k++)
+                    {
+                        for (int l = 0; l < 3; l++)
+                        {
+                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
+                        }
+                    }
+
+                    Byte newG = Convert.ToByte(gray / 9);
+                    Color newC = Color.FromArgb(newG, newG, newG);
+                    GrayIMG.SetPixel(x, y, newC);
+                }
+                try { progressBar.Increment(1); } catch { }
+            }
+
+            return GrayIMG;
+        }
+
+        private static float[,] BoLoc3x3()
+        {
+            float[,] boloc = new float[3, 3];
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    boloc[i, j] = 1;
+                }
+            }
+
+            return boloc;
         }
     }
 }

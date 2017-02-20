@@ -53,5 +53,21 @@ namespace XuLyAnh
             if (save.ShowDialog() == DialogResult.OK)
                 pictureBox2.Image.Save(save.FileName);
         }
+
+        private void buttonDenTrang_Click(object sender, EventArgs e)
+        {
+            if (flag)
+            {
+                Bitmap bm = new Bitmap(pictureBox1.Image);
+                pictureBox2.Image = ImageProcessor.TichChap(bm,progressBar1);
+                progressBar1.Value = 0;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //Bitmap bm = new Bitmap(pictureBox1.Image);
+            //pictureBox1.Image = ImageProcessor.ToGray(bm);
+        }
     }
 }
