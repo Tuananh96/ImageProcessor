@@ -52,7 +52,7 @@ namespace XuLyAnh
 
         public static Bitmap TichChap(Bitmap img)
         {
-            Bitmap GrayIMG = ToGray(img);
+            Bitmap GrayIMG = img;
             float[,] boloc = BoLoc3x3();
             //float thisDoXam;
 
@@ -60,17 +60,23 @@ namespace XuLyAnh
             {
                 for (int y = 2; y < GrayIMG.Height; y++)
                 {
-                    float gray = 0;
+                    float red = 0;
+                    float green = 0;
+                    float blue = 0;
                     for (int k = 0; k < 3; k++)
                     {
                         for (int l = 0; l < 3; l++)
                         {
-                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
+                            red += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
+                            green += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).G;
+                            blue += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).B;
                         }
                     }
 
-                    Byte newG = Convert.ToByte(gray/9);
-                    Color newC = Color.FromArgb(newG,newG,newG);
+                    Byte newR = Convert.ToByte(red / 9);
+                    Byte newB = Convert.ToByte(blue / 9);
+                    Byte newG = Convert.ToByte(green / 9);
+                    Color newC = Color.FromArgb(newR, newG, newB);
                     GrayIMG.SetPixel(x, y, newC);
                 }
             }
@@ -78,34 +84,40 @@ namespace XuLyAnh
             return GrayIMG;
         }
 
-        public static Bitmap TichChap(Bitmap img, System.Windows.Forms.ProgressBar progressBar)
+        public static Bitmap TichChap(Bitmap bitmap, System.Windows.Forms.ProgressBar progressBar)
         {
-            Bitmap GrayIMG = img;
+            Bitmap img = new Bitmap(bitmap);
             float[,] boloc = BoLoc3x3();
-            progressBar.Maximum = GrayIMG.Width;
+            progressBar.Maximum = img.Width;
 
-            for (int x = 2; x < GrayIMG.Width; x++)
+            for (int x = 2; x < img.Width; x++)
             {
-                for (int y = 2; y < GrayIMG.Height; y++)
+                for (int y = 2; y < img.Height; y++)
                 {
-                    float gray = 0;
-
+                    float red = 0;
+                    float green = 0;
+                    float blue = 0;
                     for (int k = 0; k < 3; k++)
                     {
                         for (int l = 0; l < 3; l++)
                         {
-                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
+                            red += boloc[k, l] * float.Parse("" + img.GetPixel(x - k, y - l).R);
+                            green += boloc[k, l] * float.Parse("" + img.GetPixel(x - k, y - l).G);
+                            blue += boloc[k, l] * float.Parse("" + img.GetPixel(x - k, y - l).B);
                         }
                     }
 
-                    Byte newG = Convert.ToByte(gray / 9);
-                    Color newC = Color.FromArgb(newG, newG, newG);
-                    GrayIMG.SetPixel(x, y, newC);
+                    Byte newR = Convert.ToByte(red);
+                    Byte newB = Convert.ToByte(blue);
+                    Byte newG = Convert.ToByte(green);
+                    Color newC = Color.FromArgb(newR, newG, newB);
+                    img.SetPixel(x, y, newC);
                 }
+
                 try { progressBar.Increment(1); } catch { }
             }
 
-            return GrayIMG;
+            return img;
         }
 
         private static float[,] BoLoc3x3()
@@ -115,10 +127,9 @@ namespace XuLyAnh
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    boloc[i, j] = 1;
+                    boloc[i, j] = (float) 1/9;
                 }
             }
-
             return boloc;
         }
     }

@@ -136,7 +136,7 @@
             this.buttonDenTrang.Name = "buttonDenTrang";
             this.buttonDenTrang.Size = new System.Drawing.Size(133, 23);
             this.buttonDenTrang.TabIndex = 5;
-            this.buttonDenTrang.Text = "Làm mờ ảnh (ảnh xám)";
+            this.buttonDenTrang.Text = "Làm mờ ảnh (Tích chập)";
             this.buttonDenTrang.UseVisualStyleBackColor = true;
             this.buttonDenTrang.Click += new System.EventHandler(this.buttonDenTrang_Click);
             // 

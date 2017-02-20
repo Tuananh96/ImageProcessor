@@ -49,7 +49,7 @@ namespace XuLyAnh
         private void buttonLuuAnh_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "Bmp Files|*.bmp";
+            save.Filter = "All File (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
             if (save.ShowDialog() == DialogResult.OK)
                 pictureBox2.Image.Save(save.FileName);
         }
