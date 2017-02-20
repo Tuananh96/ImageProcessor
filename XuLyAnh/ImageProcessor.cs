@@ -21,7 +21,7 @@ namespace XuLyAnh
                 for (j = 0; j < newImg.Height; j++)
                 {
                     color = newImg.GetPixel(i, j);
-                    gray = Convert.ToByte(color.R * 0.287 + color.G * 0.599 + color.B * 0.114);
+                    gray = Convert.ToByte(color.R * 0.333 + color.G * 0.333 + color.B * 0.333);
                     newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
             }
@@ -50,47 +50,59 @@ namespace XuLyAnh
             return newImg;
         }
 
-        public static Bitmap ToBlackWhite(Bitmap img, System.Windows.Forms.ProgressBar progressBar)
-        {
-            Bitmap newImg = new Bitmap(img);
-            Color color;
-            Byte gray;
-            progressBar.Maximum = img.Width;
-
-            for (int i = 0; i < newImg.Width; i+=1)
-            {
-                for (int j = 0; j < newImg.Height; j+=1)
-                {
-                    color = newImg.GetPixel(i, j);
-                    gray = Convert.ToByte(color.R * 0.287 + color.G * 0.599 + color.B * 0.114);
-                    if (gray >= 128) gray = 255;
-                    else gray = 0;
-                    newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
-                }
-                progressBar.Increment(1);
-            }
-
-            return newImg;
-        }
-
         public static Bitmap TichChap(Bitmap img)
         {
             Bitmap GrayIMG = ToGray(img);
             float[,] boloc = BoLoc3x3();
+            //float thisDoXam;
 
-            for (int x = 1; x < GrayIMG.Width-1; x++)
+            for (int x = 2; x < GrayIMG.Width; x++)
             {
-                for (int y = 0; y < GrayIMG.Height-1; y++)
+                for (int y = 2; y < GrayIMG.Height; y++)
                 {
-                    //Byte doXam = getDoXamPixel(GrayIMG, x, y);
-                    for (int i = 0; i < 3; i++)
+                    float gray = 0;
+                    for (int k = 0; k < 3; k++)
                     {
-                        for (int j = 0; j < 3; j++)
+                        for (int l = 0; l < 3; l++)
                         {
-                           // setDoXamPixel(GrayIMG, x, y, doXam);
+                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
                         }
                     }
+
+                    Byte newG = Convert.ToByte(gray/9);
+                    Color newC = Color.FromArgb(newG,newG,newG);
+                    GrayIMG.SetPixel(x, y, newC);
                 }
+            }
+
+            return GrayIMG;
+        }
+
+        public static Bitmap TichChap(Bitmap img, System.Windows.Forms.ProgressBar progressBar)
+        {
+            Bitmap GrayIMG = img;
+            float[,] boloc = BoLoc3x3();
+            progressBar.Maximum = GrayIMG.Width;
+
+            for (int x = 2; x < GrayIMG.Width; x++)
+            {
+                for (int y = 2; y < GrayIMG.Height; y++)
+                {
+                    float gray = 0;
+
+                    for (int k = 0; k < 3; k++)
+                    {
+                        for (int l = 0; l < 3; l++)
+                        {
+                            gray += boloc[k, l] * GrayIMG.GetPixel(x - k, y - l).R;
+                        }
+                    }
+
+                    Byte newG = Convert.ToByte(gray / 9);
+                    Color newC = Color.FromArgb(newG, newG, newG);
+                    GrayIMG.SetPixel(x, y, newC);
+                }
+                try { progressBar.Increment(1); } catch { }
             }
 
             return GrayIMG;
@@ -103,17 +115,11 @@ namespace XuLyAnh
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    boloc[i, j] = 1 / 9;
+                    boloc[i, j] = 1;
                 }
             }
 
             return boloc;
         }
-
-        private static byte getDoXamPixel(Bitmap grayIMG, int x, int y)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
