@@ -36,12 +36,35 @@ namespace XuLyAnh
             Byte gray;
             progressBar.Maximum = img.Width;
 
-            for (int i = 0; i < newImg.Width; i++)
+            for (int i = 0; i < newImg.Width; i+=1)
             {
-                for (int j = 0; j < newImg.Height; j++)
+                for (int j = 0; j < newImg.Height; j+=1)
+                {
+                    color = newImg.GetPixel(i, j);
+                    gray = Convert.ToByte(color.R * 0.333 + color.G * 0.333 + color.B * 0.333);
+                    newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
+                }
+                progressBar.Increment(1);
+            }
+            
+            return newImg;
+        }
+
+        public static Bitmap ToBlackWhite(Bitmap img, System.Windows.Forms.ProgressBar progressBar)
+        {
+            Bitmap newImg = new Bitmap(img);
+            Color color;
+            Byte gray;
+            progressBar.Maximum = img.Width;
+
+            for (int i = 0; i < newImg.Width; i+=1)
+            {
+                for (int j = 0; j < newImg.Height; j+=1)
                 {
                     color = newImg.GetPixel(i, j);
                     gray = Convert.ToByte(color.R * 0.287 + color.G * 0.599 + color.B * 0.114);
+                    if (gray >= 128) gray = 255;
+                    else gray = 0;
                     newImg.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
                 progressBar.Increment(1);
@@ -50,34 +73,44 @@ namespace XuLyAnh
             return newImg;
         }
 
-        public static Bitmap TichChap(Bitmap img, int [,] boLoc, int m, int n)
+        public static Bitmap TichChap(Bitmap img)
         {
             Bitmap newImg = new Bitmap(img);
-            Color color;
-            Byte value=0;
-            for (int x = 0; x < newImg.Width; x++)
+            Color oldColor, newColor;
+            Byte oldValue, newValue;
+            for (int x = 1; x < newImg.Width-1; x++)
             {
-                for (int y = 0; y < newImg.Height; y++)
+                for (int y = 1; y < newImg.Height-1; y++)
                 {
-                    for (int i = 0; i < n; i++)
-                    {
-                        for (int j = 0; j < m; j++)
-                        {
-                            int pix1 = x - i;
-                            int pix2 = y - j;
-                            if (pix1 < 0) pix1 = 0;
-                            if (pix2 < 0) pix2 = 0;
-                            if (pix1 > newImg.Width) pix1 = newImg.Width;
-                            if (pix2 > newImg.Height) pix2 = newImg.Height;
-                            color = newImg.GetPixel(pix1, pix2);
-                            value = Convert.ToByte(boLoc[i, j] * (color.R + color.G + color.B)/3);
-                        }
-                    }
-                    newImg.SetPixel(x, y, Color.FromArgb(value, value, value));
+                    oldColor = newImg.GetPixel(x, y);
+                    oldValue = Convert.ToByte((oldColor.G + oldColor.B + oldColor.R)/3);
+                    oldColor = Color.FromArgb(oldValue, oldValue, oldValue);
+
+                    newValue = 0;
+
+                    newImg.SetPixel(x - 1, y - 1, oldColor);
                 }
             }
 
             return newImg;
         }
+
+        private static byte TichChap3x3(int x, int y)
+        {
+            float[,] boloc= new float[3, 3];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    boloc[i, j] = 1 / 9;
+
+
+            throw new NotImplementedException();
+        }
+
+        private static byte GetValueColorFromPixel(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

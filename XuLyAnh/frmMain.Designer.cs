@@ -37,6 +37,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonDenTrang = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonDenTrang);
             this.groupBox1.Controls.Add(this.buttonToGray);
             this.groupBox1.Location = new System.Drawing.Point(560, 41);
             this.groupBox1.Name = "groupBox1";
@@ -126,6 +128,16 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Công cụ";
+            // 
+            // buttonDenTrang
+            // 
+            this.buttonDenTrang.Location = new System.Drawing.Point(22, 62);
+            this.buttonDenTrang.Name = "buttonDenTrang";
+            this.buttonDenTrang.Size = new System.Drawing.Size(133, 23);
+            this.buttonDenTrang.TabIndex = 5;
+            this.buttonDenTrang.Text = "Chuyển sang đen trắng";
+            this.buttonDenTrang.UseVisualStyleBackColor = true;
+            this.buttonDenTrang.Click += new System.EventHandler(this.buttonDenTrang_Click);
             // 
             // frmMain
             // 
@@ -160,5 +172,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonDenTrang;
     }
 }
