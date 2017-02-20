@@ -75,42 +75,45 @@ namespace XuLyAnh
 
         public static Bitmap TichChap(Bitmap img)
         {
-            Bitmap newImg = new Bitmap(img);
-            Color oldColor, newColor;
-            Byte oldValue, newValue;
-            for (int x = 1; x < newImg.Width-1; x++)
+            Bitmap GrayIMG = ToGray(img);
+            float[,] boloc = BoLoc3x3();
+
+            for (int x = 1; x < GrayIMG.Width-1; x++)
             {
-                for (int y = 1; y < newImg.Height-1; y++)
+                for (int y = 0; y < GrayIMG.Height-1; y++)
                 {
-                    oldColor = newImg.GetPixel(x, y);
-                    oldValue = Convert.ToByte((oldColor.G + oldColor.B + oldColor.R)/3);
-                    oldColor = Color.FromArgb(oldValue, oldValue, oldValue);
-
-                    newValue = 0;
-
-                    newImg.SetPixel(x - 1, y - 1, oldColor);
+                    //Byte doXam = getDoXamPixel(GrayIMG, x, y);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                           // setDoXamPixel(GrayIMG, x, y, doXam);
+                        }
+                    }
                 }
             }
 
-            return newImg;
+            return GrayIMG;
         }
 
-        private static byte TichChap3x3(int x, int y)
+        private static float[,] BoLoc3x3()
         {
-            float[,] boloc= new float[3, 3];
+            float[,] boloc = new float[3, 3];
             for (int i = 0; i < 3; i++)
+            {
                 for (int j = 0; j < 3; j++)
+                {
                     boloc[i, j] = 1 / 9;
+                }
+            }
 
-
-            throw new NotImplementedException();
+            return boloc;
         }
 
-        private static byte GetValueColorFromPixel(int x, int y)
+        private static byte getDoXamPixel(Bitmap grayIMG, int x, int y)
         {
             throw new NotImplementedException();
         }
-
 
     }
 }
